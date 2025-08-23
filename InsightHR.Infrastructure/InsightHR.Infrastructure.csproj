@@ -8,7 +8,16 @@
 
   <ItemGroup>
     <Folder Include="Extensions\" />
-    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.66" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InsightHR.Application\InsightHR.Application.csproj" />
+    <ProjectReference Include="..\InsightHR.Persistence\InsightHR.Persistence.csproj" />
+    <ProjectReference Include="..\InsightHR.Shared\InsightHR.Shared.csproj" />
   </ItemGroup>
 
 </Project>
