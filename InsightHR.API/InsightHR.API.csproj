@@ -18,8 +18,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controller\" />
     <Folder Include="Middleware\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InsightHR.Application\InsightHR.Application.csproj" />
+    <ProjectReference Include="..\InsightHR.Infrastructure\InsightHR.Infrastructure.csproj" />
+    <ProjectReference Include="..\InsightHR.Persistence\InsightHR.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
