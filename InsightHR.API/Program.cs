@@ -1,3 +1,7 @@
+using InsightHR.Application.Interfaces;
+using InsightHR.Infrastructure.Services;
+using InsightHR.Persistence.Context;
+using InsightHR.Persistence.Repositories;
 
 namespace InsightHR.API
 {
@@ -7,8 +11,9 @@ namespace InsightHR.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
+            builder.Services.AddSingleton<DapperContext>();
+            builder.Services.AddScoped<IwagesRepositery, WagesRepo>();
+            builder.Services.AddScoped<IwagesServices, Employee_Wages>();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -20,6 +25,7 @@ namespace InsightHR.API
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
+
                 app.UseSwaggerUI();
             }
 
