@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\InsightHR.Shared\InsightHR.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Dtos\" />
-    <Folder Include="Interfaces\" />
   </ItemGroup>
 
 </Project>
