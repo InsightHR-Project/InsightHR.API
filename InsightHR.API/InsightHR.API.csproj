@@ -7,7 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\**" />
+    <Content Remove="Controllers\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <None Remove="Controllers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InsightHR.Application\InsightHR.Application.csproj" />
+    <ProjectReference Include="..\InsightHR.Infrastructure\InsightHR.Infrastructure.csproj" />
+    <ProjectReference Include="..\InsightHR.Shared\InsightHR.Shared.csproj" />
   </ItemGroup>
 
 </Project>

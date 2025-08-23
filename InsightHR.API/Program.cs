@@ -1,3 +1,6 @@
+using InsightHR.API.Middleware;
+using InsightHR.Infrastructure.Extensions;
+using InsightHR.Persistence.Context;
 
 namespace InsightHR.API
 {
@@ -7,16 +10,24 @@ namespace InsightHR.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
+            // Add services to the container
+            builder.Services.AddHttpClient(); 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            // Register Application Services & Repositories
+            builder.Services.AddApplicationServices();
+
+       
+            builder.Services.AddScoped<DapperContext>();
+
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+        
+            app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
+
+            // Configure the HTTP request pipeline
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -25,8 +36,10 @@ namespace InsightHR.API
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+         
+            //app.UseMiddleware<ApiKeyMiddleware>();
 
+            app.UseAuthorization();
 
             app.MapControllers();
 
