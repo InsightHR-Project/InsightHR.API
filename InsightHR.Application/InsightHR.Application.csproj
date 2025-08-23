@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\InsightHR.Shared\InsightHR.Shared.csproj" />
+  </ItemGroup>
+
+
 </Project>

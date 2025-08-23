@@ -12,10 +12,15 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.1" />
+    <PackageReference Include="Dapper" Version="2.1.66" />    <PackageReference Include="Dapper" Version="2.1.66" />
+
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\InsightHR.Application\InsightHR.Application.csproj" />
+    <ProjectReference Include="..\InsightHR.Persistence\InsightHR.Persistence.csproj" />
+    <ProjectReference Include="..\InsightHR.Shared\InsightHR.Shared.csproj" />
+
   </ItemGroup>
 
 </Project>
