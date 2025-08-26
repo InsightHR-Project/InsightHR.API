@@ -4,6 +4,9 @@ using InsightHR.Infrastructure.Services;
 using InsightHR.Persistence.Context;
 using InsightHR.Persistence.Repositories;
 using InsightHR.Infrastructure.Extensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace InsightHR.API
 {
@@ -27,6 +30,30 @@ namespace InsightHR.API
 
 
             builder.Services.AddScoped<DapperContext>();
+
+
+
+            // JWT Authentication Configuration 
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(o =>
+            {
+                o.TokenValidationParameters = new TokenValidationParameters
+                {
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true
+                };
+                o.RequireHttpsMetadata = false; 
+                o.SaveToken = true;
+            });
+
 
             var app = builder.Build();
 
