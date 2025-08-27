@@ -37,7 +37,15 @@ namespace InsightHR.Infrastructure.Services
             if (user == null)
                 return ApiResponse<AuthResponseDto>.Fail("Invalid credentials", 401);
 
-            bool validPassword = BCrypt.Net.BCrypt.Verify(login.Password, (string)user.password_hash);
+            // 🔹 Debug: Check password hash manually
+            string storedHash = (string)user.password_hash;
+            bool validPassword = BCrypt.Net.BCrypt.Verify(login.Password, storedHash);
+
+            Console.WriteLine($"DEBUG: Login attempt for {login.Email}");
+            Console.WriteLine($"DEBUG: Entered password: {login.Password}");
+            Console.WriteLine($"DEBUG: Stored hash: {storedHash}");
+            Console.WriteLine($"DEBUG: Password valid? {validPassword}");
+
             if (!validPassword)
                 return ApiResponse<AuthResponseDto>.Fail("Invalid credentials", 401);
 
@@ -53,6 +61,7 @@ namespace InsightHR.Infrastructure.Services
 
             return ApiResponse<AuthResponseDto>.Ok(response, "Login successful");
         }
+
 
 
 
