@@ -18,12 +18,22 @@ namespace InsightHR.Infrastructure.Extensions
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IShiftRepository, ShiftRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IApplicationRepository, ApplicationRepository>();
+            services.AddScoped<IJobRepository, JobRepository>();
+            services.AddScoped<IAttendanceLogRepository,AttendanceLogRepository>();
+            //services.AddScoped<IPerformanceReviewRepository,PerformanceReviewRepository>();
+
+
 
             // Services
             services.AddScoped<IRoleService, RoleService>();
-            services.AddScoped<IShiftService, ShiftService>();
+            services.AddScoped<IShiftService, ShiftService>();    
             services.AddScoped<IAuthService, AuthService>();
-            // Add other repositories/services here as needed
+            services.AddScoped<IApplicationService, ApplicationService>();
+            services.AddScoped<IJobService, JobService>();
+            services.AddScoped<IAttendanceLogService, AttendanceLogService>();
+            //services.AddScoped<IPerformanceReviewService,PerformanceReviewService>();
+
 
             return services;
         }
