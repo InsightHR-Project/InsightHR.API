@@ -18,6 +18,7 @@ namespace InsightHR.Infrastructure.Extensions
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IShiftRepository, ShiftRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IChatRepository, ChatRepository>();
 
             services.AddScoped<ISalaryComponentRepository, SalaryComponentRepository>();
             services.AddScoped<IwagesRepositery, WagesRepo>();
@@ -32,12 +33,16 @@ namespace InsightHR.Infrastructure.Extensions
             services.AddScoped<IShiftService, ShiftService>();
             services.AddScoped<IAuthService, AuthService>();
 
+            services.AddScoped<IChatService, ChatService>();
+
+
             services.AddScoped<ISalaryComponentService, SalaryComponentService>();
             services.AddScoped<IwagesServices, Employee_Wages>();
             services.AddScoped<ILoanService,LoanService>();
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped < IDepartmentService,DepartmentService > ();
+
 
 
             return services;
