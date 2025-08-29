@@ -24,4 +24,9 @@ namespace InsightHR.Application.Interfaces
         Task<string> RejectAsync(LoanApprovalDto dto);
         
     }
+
+    public interface IloanRepayments
+    {
+        Task<IEnumerable<dynamic>> GetAllAsync(int userId);
+    }
 }
