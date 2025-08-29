@@ -23,46 +23,48 @@ namespace InsightHR.Persistence.Repositories
             _connectionString = context;
             }
 
-            public async Task<IEnumerable<dynamic>> GetAllAsync()
-            {
-                using var con = _connectionString.CreateConnection();
+
+        public async Task<IEnumerable<dynamic>> GetAllAsync()
+        {
+            using var con = _connectionString.CreateConnection();
             return await con.QueryAsync<IEnumerable<dynamic>>(
                     "SP_JobsMaster",
                     new { Flag = 1, JsonData = (string?)null },
                     commandType: CommandType.StoredProcedure);
-            }
+        }
 
-            //public async Task<int> CreateAsync(JobCreateDto jobDto)
-            //{
-            //    using var con = new SqlConnection(_connectionString);
-            //    var json = JsonSerializer.Serialize(jobDto);
-            //    return await con.ExecuteAsync(
-            //        "SP_JobsMaster",
-            //        new { Flag = 2, JsonData = json },
-            //        commandType: CommandType.StoredProcedure);
-            //}
 
-            //public async Task<int> UpdateAsync(JobUpdateDto jobDto)
-            //{
-            //    using var con = new SqlConnection(_connectionString);
-            //    var json = JsonSerializer.Serialize(jobDto);
-            //    return await con.ExecuteAsync(
-            //        "SP_JobsMaster",
-            //        new { Flag = 3, JsonData = json },
-            //        commandType: CommandType.StoredProcedure);
-            //}
+        //public async Task<int> CreateAsync(JobCreateDto jobDto)
+        //{
+        //    using var con = new SqlConnection(_connectionString);
+        //    var json = JsonSerializer.Serialize(jobDto);
+        //    return await con.ExecuteAsync(
+        //        "SP_JobsMaster",
+        //        new { Flag = 2, JsonData = json },
+        //        commandType: CommandType.StoredProcedure);
+        //}
 
-            //public async Task<int> DeleteAsync(int id)
-            //{
-            //    using var con = new SqlConnection(_connectionString);
-            //    var json = JsonSerializer.Serialize(new { id });
-            //    return await con.ExecuteAsync(
-            //        "SP_JobsMaster",
-            //        new { Flag = 4, JsonData = json },
-            //        commandType: CommandType.StoredProcedure);
-            //}
+        //public async Task<int> UpdateAsync(JobUpdateDto jobDto)
+        //{
+        //    using var con = new SqlConnection(_connectionString);
+        //    var json = JsonSerializer.Serialize(jobDto);
+        //    return await con.ExecuteAsync(
+        //        "SP_JobsMaster",
+        //        new { Flag = 3, JsonData = json },
+        //        commandType: CommandType.StoredProcedure);
+        //}
 
-            public async Task<int> CreateAsync(JobCreateDto jobDto)
+        //public async Task<int> DeleteAsync(int id)
+        //{
+        //    using var con = new SqlConnection(_connectionString);
+        //    var json = JsonSerializer.Serialize(new { id });
+        //    return await con.ExecuteAsync(
+        //        "SP_JobsMaster",
+        //        new { Flag = 4, JsonData = json },
+        //        commandType: CommandType.StoredProcedure);
+        //}
+
+        public async Task<int> CreateAsync(JobCreateDto jobDto)
             {
                 using var con = _connectionString.CreateConnection();
 

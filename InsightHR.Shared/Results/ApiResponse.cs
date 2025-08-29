@@ -18,5 +18,10 @@ namespace InsightHR.Shared.Results
 
         public static ApiResponse<T> Fail(string message, int statusCode = 400) =>
             new ApiResponse<T> { Success = false, Message = message, StatusCode = statusCode };
+
+        public static ApiResponse<IEnumerable<dynamic>> Ok(ApiResponse<IEnumerable<dynamic>> reviews, string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

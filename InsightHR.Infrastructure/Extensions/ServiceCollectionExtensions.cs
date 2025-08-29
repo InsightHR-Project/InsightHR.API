@@ -2,11 +2,6 @@
 using InsightHR.Infrastructure.Services;
 using InsightHR.Persistence.Repositories;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InsightHR.Infrastructure.Extensions
 {
@@ -18,32 +13,35 @@ namespace InsightHR.Infrastructure.Extensions
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IShiftRepository, ShiftRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
+
+            services.AddScoped<IApplicationRepository, ApplicationRepository>();
+            services.AddScoped<IJobRepository, JobRepository>();
+            services.AddScoped<IAttendanceLogRepository, AttendanceLogRepository>();
+            //services.AddScoped<IPerformanceReviewRepository, PerformanceReviewRepository>();
+
             services.AddScoped<IChatRepository, ChatRepository>();
-
             services.AddScoped<ISalaryComponentRepository, SalaryComponentRepository>();
-            services.AddScoped<IwagesRepositery, WagesRepo>();
+            services.AddScoped<IWagesRepository, WagesRepository>();   
             services.AddScoped<ILoanRepository, LoanRepository>();
-
-
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 
-
+            // Services
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IShiftService, ShiftService>();
             services.AddScoped<IAuthService, AuthService>();
 
+            services.AddScoped<IApplicationService, ApplicationService>();
+            services.AddScoped<IJobService, JobService>();
+            services.AddScoped<IAttendanceLogService, AttendanceLogService>();
+            //services.AddScoped<IPerformanceReviewService, PerformanceReviewService>();
+
             services.AddScoped<IChatService, ChatService>();
-
-
             services.AddScoped<ISalaryComponentService, SalaryComponentService>();
-            services.AddScoped<IwagesServices, Employee_Wages>();
-            services.AddScoped<ILoanService,LoanService>();
-
+            services.AddScoped<IWagesService, WagesService>();         
+            services.AddScoped<ILoanService, LoanService>();
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped < IDepartmentService,DepartmentService > ();
-
-
+            services.AddScoped<IDepartmentService, DepartmentService>(); 
 
             return services;
         }
