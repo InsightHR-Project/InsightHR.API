@@ -2,12 +2,14 @@
 using InsightHR.Application.Dtos;
 using InsightHR.Application.Interfaces;
 using InsightHR.Shared.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InsightHR.API.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class RoleController : ControllerBase
     {
         private readonly IRoleService _roleService;
