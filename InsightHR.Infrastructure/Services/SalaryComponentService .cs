@@ -26,7 +26,7 @@ namespace InsightHR.Infrastructure.Services
 
         public async Task<ApiResponse<SalaryComponentResponseDto>> InsertAsync(SalaryComponentInsertDto dto)
         {
-            if (dto.SalaryId <= 0)
+            if (dto.WagesId <= 0)
                 return ApiResponse<SalaryComponentResponseDto>.Fail("SalaryId is required");
 
             var result = await _repository.InsertAsync(dto);
