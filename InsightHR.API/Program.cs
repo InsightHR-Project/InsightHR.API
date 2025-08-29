@@ -25,8 +25,6 @@ namespace InsightHR.API
             // Register Application Services & Repositories
             builder.Services.AddApplicationServices();
 
-            builder.Services.AddScoped<IwagesRepositery, WagesRepo>();
-            builder.Services.AddScoped<IwagesServices, Employee_Wages>();
 
 
             builder.Services.AddScoped<DapperContext>();
