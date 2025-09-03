@@ -21,7 +21,7 @@ namespace InsightHR.Infrastructure.Extensions
 
             services.AddScoped<IChatRepository, ChatRepository>();
             services.AddScoped<ISalaryComponentRepository, SalaryComponentRepository>();
-            services.AddScoped<IWagesRepository, WagesRepository>();   
+            services.AddScoped<IwagesRepositery, WagesRepo>();   
             services.AddScoped<ILoanRepository, LoanRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
@@ -38,7 +38,7 @@ namespace InsightHR.Infrastructure.Extensions
 
             services.AddScoped<IChatService, ChatService>();
             services.AddScoped<ISalaryComponentService, SalaryComponentService>();
-            services.AddScoped<IWagesService, WagesService>();         
+            //services.AddScoped<IwagesServices, wages>();         
             services.AddScoped<ILoanService, LoanService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IDepartmentService, DepartmentService>(); 
