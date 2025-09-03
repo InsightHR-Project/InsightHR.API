@@ -7,40 +7,40 @@ namespace InsightHR.API.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PerformanceReviewsController : ControllerBase
+    public class LeaveTypesController : ControllerBase
     {
-        private readonly IPerformanceReviewService _service;
+        private readonly ILeaveTypeService _service;
 
-        public PerformanceReviewsController(IPerformanceReviewService service)
+        public LeaveTypesController(ILeaveTypeService service)
         {
             _service = service;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] int? reviewedBy = null)
+        public async Task<IActionResult> GetAll()
         {
-            var response = await _service.GetAllReviewsAsync(reviewedBy);
+            var response = await _service.GetAllLeaveTypesAsync();
             return StatusCode(response.StatusCode, response);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] PerformanceReviewCreateDto dto)
+        public async Task<IActionResult> Create([FromBody] LeaveTypeCreateDto dto)
         {
-            var response = await _service.CreateReviewAsync(dto);
+            var response = await _service.CreateLeaveTypeAsync(dto);
             return StatusCode(response.StatusCode, response);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] PerformanceReviewUpdateDto dto)
+        public async Task<IActionResult> Update([FromBody] LeaveTypeUpdateDto dto)
         {
-            var response = await _service.UpdateReviewAsync(dto);
+            var response = await _service.UpdateLeaveTypeAsync(dto);
             return StatusCode(response.StatusCode, response);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var response = await _service.DeleteReviewAsync(id);
+            var response = await _service.DeleteLeaveTypeAsync(id);
             return StatusCode(response.StatusCode, response);
         }
     }

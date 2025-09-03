@@ -7,41 +7,42 @@ namespace InsightHR.API.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PerformanceReviewsController : ControllerBase
+    public class LeaveRequestsController : ControllerBase
     {
-        private readonly IPerformanceReviewService _service;
+        private readonly ILeaveRequestService _service;
 
-        public PerformanceReviewsController(IPerformanceReviewService service)
+        public LeaveRequestsController(ILeaveRequestService service)
         {
             _service = service;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] int? reviewedBy = null)
+        public async Task<IActionResult> GetAll()
         {
-            var response = await _service.GetAllReviewsAsync(reviewedBy);
+            var response = await _service.GetAllAsync();
             return StatusCode(response.StatusCode, response);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] PerformanceReviewCreateDto dto)
+        public async Task<IActionResult> Create(LeaveRequestCreateDto dto)
         {
-            var response = await _service.CreateReviewAsync(dto);
+            var response = await _service.CreateAsync(dto);
             return StatusCode(response.StatusCode, response);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] PerformanceReviewUpdateDto dto)
+        public async Task<IActionResult> Update(LeaveRequestUpdateDto dto)
         {
-            var response = await _service.UpdateReviewAsync(dto);
+            var response = await _service.UpdateAsync(dto);
             return StatusCode(response.StatusCode, response);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var response = await _service.DeleteReviewAsync(id);
+            var response = await _service.DeleteAsync(id);
             return StatusCode(response.StatusCode, response);
         }
     }
 }
+

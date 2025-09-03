@@ -12,69 +12,65 @@ using System.Threading.Tasks;
 
 namespace InsightHR.Persistence.Repositories
 {
-    public class PerformanceReviewRepository : IPerformanceReviewRepository
+    public class LeaveRequestRepository : ILeaveRequestRepository
     {
         private readonly DapperContext _context;
-        public PerformanceReviewRepository(DapperContext context)
+
+        public LeaveRequestRepository(DapperContext context)
         {
             _context = context;
         }
 
-        public async Task<IEnumerable<dynamic>> GetAllAsync(int? reviewedBy = null)
+        public async Task<IEnumerable<dynamic>> GetAllAsync()
         {
             using var con = _context.CreateConnection();
             return await con.QueryAsync<dynamic>(
-                "sp_PerformanceReviews",
-                new { Flag = 1, JsonData = (string?)null, reviewed_by = reviewedBy },
+                "SP_LeaveRequests",
+                new { Flag = 1, JsonData = (string?)null },
                 commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<int> CreateAsync(PerformanceReviewCreateDto dto)
+        public async Task<int> CreateAsync(LeaveRequestCreateDto dto)
         {
             using var con = _context.CreateConnection();
-
-            var json = JsonSerializer.Serialize(new
-            {
-                user_id = dto.UserId,
-                review_period = dto.ReviewPeriod,
-                score = dto.Score,
-                comments = dto.Comments
-            });
+            var json = JsonSerializer.Serialize(dto);
 
             return await con.ExecuteAsync(
-                "sp_PerformanceReviews",
-                new { Flag = 2, JsonData = json, reviewed_by = dto.ReviewedBy },
+                "SP_LeaveRequests",
+                new { Flag = 2, JsonData = json },
                 commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<int> UpdateAsync(PerformanceReviewUpdateDto dto)
+        public async Task<int> UpdateAsync(LeaveRequestUpdateDto dto)
         {
             using var con = _context.CreateConnection();
-
-            var json = JsonSerializer.Serialize(new
-            {
-                id = dto.Id,
-                user_id = dto.UserId,
-                review_period = dto.ReviewPeriod,
-                score = dto.Score,
-                comments = dto.Comments
-            });
+            var json = JsonSerializer.Serialize(dto);
 
             return await con.ExecuteAsync(
-                "sp_PerformanceReviews",
-                new { Flag = 3, JsonData = json, reviewed_by = dto.ReviewedBy },
+                "SP_LeaveRequests",
+                new { Flag = 3, JsonData = json },
                 commandType: CommandType.StoredProcedure);
         }
 
         public async Task<int> DeleteAsync(int id)
         {
             using var con = _context.CreateConnection();
-
             var json = JsonSerializer.Serialize(new { id });
 
             return await con.ExecuteAsync(
-                "sp_PerformanceReviews",
+                "SP_LeaveRequests",
                 new { Flag = 4, JsonData = json },
+                commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<int> ManagerDecisionAsync(ManagerDecisionDto dto)
+        {
+            using var con = _context.CreateConnection();
+            var json = JsonSerializer.Serialize(dto);
+
+            return await con.ExecuteAsync(
+                "SP_LeaveRequests",
+                new { Flag = 5, JsonData = json },
                 commandType: CommandType.StoredProcedure);
         }
     }

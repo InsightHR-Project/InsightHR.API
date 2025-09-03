@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace InsightHR.Application.Interfaces
 {
-    public interface IPerformanceReviewRepository
+    public interface ILeaveTypeRepository
     {
-        Task<IEnumerable<dynamic>> GetAllAsync(int? reviewedBy = null);
-        Task<int> CreateAsync(PerformanceReviewCreateDto dto);
-        Task<int> UpdateAsync(PerformanceReviewUpdateDto dto);
+        Task<IEnumerable<dynamic>> GetAllAsync();
+        Task<int> CreateAsync(LeaveTypeCreateDto dto);
+        Task<int> UpdateAsync(LeaveTypeUpdateDto dto);
         Task<int> DeleteAsync(int id);
     }
 }
