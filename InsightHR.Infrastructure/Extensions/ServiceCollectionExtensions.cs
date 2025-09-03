@@ -17,8 +17,10 @@ namespace InsightHR.Infrastructure.Extensions
             services.AddScoped<IApplicationRepository, ApplicationRepository>();
             services.AddScoped<IJobRepository, JobRepository>();
             services.AddScoped<IAttendanceLogRepository, AttendanceLogRepository>();
+            services.AddScoped<IPerformanceReviewRepository, PerformanceReviewRepository>();
+            services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
+            services.AddScoped<ILeaveRequestRepository, LeaveRequestRepository>();
             //services.AddScoped<IPerformanceReviewRepository, PerformanceReviewRepository>();
-
             services.AddScoped<IChatRepository, ChatRepository>();
             services.AddScoped<ISalaryComponentRepository, SalaryComponentRepository>();
             services.AddScoped<IwagesRepositery, WagesRepo>();   
@@ -30,12 +32,13 @@ namespace InsightHR.Infrastructure.Extensions
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IShiftService, ShiftService>();
             services.AddScoped<IAuthService, AuthService>();
-
             services.AddScoped<IApplicationService, ApplicationService>();
             services.AddScoped<IJobService, JobService>();
             services.AddScoped<IAttendanceLogService, AttendanceLogService>();
+            services.AddScoped<IPerformanceReviewService, PerformanceReviewService>();
+            services.AddScoped<ILeaveTypeService, LeaveTypeService>();
+            services.AddScoped<ILeaveRequestService, LeaveRequestService>();
             //services.AddScoped<IPerformanceReviewService, PerformanceReviewService>();
-
             services.AddScoped<IChatService, ChatService>();
             services.AddScoped<ISalaryComponentService, SalaryComponentService>();
             //services.AddScoped<IwagesServices, wages>();         

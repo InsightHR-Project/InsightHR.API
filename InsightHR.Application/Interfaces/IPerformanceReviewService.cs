@@ -10,9 +10,9 @@ namespace InsightHR.Application.Interfaces
 {
     public interface IPerformanceReviewService
     {
-        Task<ApiResponse<IEnumerable<dynamic>>> GetAll(int? reviewedBy = null);
-        Task<ApiResponse<string>> Create(PerformanceReviewDto review, int reviewedBy);
-        Task<ApiResponse<string>> Update(PerformanceReviewUpdateDto review, int? reviewedBy = null);
-        Task<ApiResponse<string>> Delete(int id);
+        Task<ApiResponse<IEnumerable<dynamic>>> GetAllReviewsAsync(int? reviewedBy = null);
+        Task<ApiResponse<int>> CreateReviewAsync(PerformanceReviewCreateDto dto);
+        Task<ApiResponse<int>> UpdateReviewAsync(PerformanceReviewUpdateDto dto);
+        Task<ApiResponse<int>> DeleteReviewAsync(int id);
     }
 }
