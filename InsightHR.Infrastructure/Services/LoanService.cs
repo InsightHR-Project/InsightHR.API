@@ -1,10 +1,8 @@
-﻿using InsightHR.Application.Dtos;
+﻿using Application.Common.Interfaces;  // same as SalaryComponentService
+using InsightHR.Application.Dtos;
 using InsightHR.Application.Interfaces;
 using InsightHR.Shared.Results;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace InsightHR.Infrastructure.Services
@@ -12,10 +10,12 @@ namespace InsightHR.Infrastructure.Services
     public class LoanService : ILoanService
     {
         private readonly ILoanRepository _loanRepository;
+        private readonly INotificationService _notificationService;
 
-        public LoanService(ILoanRepository loanRepository)
+        public LoanService(ILoanRepository loanRepository, INotificationService notificationService)
         {
             _loanRepository = loanRepository;
+            _notificationService = notificationService;
         }
 
         public async Task<ApiResponse<IEnumerable<dynamic>>> GetAllAsync()
@@ -33,15 +33,29 @@ namespace InsightHR.Infrastructure.Services
         public async Task<ApiResponse<string>> ApproveAsync(LoanApprovalDto dto)
         {
             var message = await _loanRepository.ApproveAsync(dto);
-            return ApiResponse<string>.Ok(message);
+
+            var loan = await _loanRepository.GetByIdAsync(dto.loan_id);
+            if (loan != null)
+            {
+                var notifyMessage = $"Hello, your loan request (#{loan.Id}) has been approved by HR.";
+                await _notificationService.SendNotificationAsync(loan.UserId, notifyMessage);
+            }
+
+            return ApiResponse<string>.Ok(message, "Loan approved and user notified");
         }
 
         public async Task<ApiResponse<string>> RejectAsync(LoanApprovalDto dto)
         {
             var message = await _loanRepository.RejectAsync(dto);
-            return ApiResponse<string>.Ok(message);
-        }
 
-      
+            var loan = await _loanRepository.GetByIdAsync(dto.loan_id);
+            if (loan != null)
+            {
+                var notifyMessage = $"Hello, your loan request (#{loan.Id}) has been rejected by HR.";
+                await _notificationService.SendNotificationAsync(loan.UserId, notifyMessage);
+            }
+
+            return ApiResponse<string>.Ok(message, "Loan rejected and user notified");
+        }
     }
 }

@@ -51,7 +51,7 @@ namespace InsightHR.API
             });
 
             // Register Application Services & Repositories
-            builder.Services.AddApplicationServices();
+            builder.Services.AddApplicationServices(builder.Configuration);
 
 
 

@@ -43,9 +43,5 @@ namespace InsightHR.Application.Dtos
         public int approved_by { get; set; }
     }
 
-    public class LoanFilterDto
-    {
-        public int? UserId { get; set; }
-        public string? Status { get; set; }
-    }
+
 }

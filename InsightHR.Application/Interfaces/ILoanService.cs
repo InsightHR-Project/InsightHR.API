@@ -22,6 +22,10 @@ namespace InsightHR.Application.Interfaces
         Task<string> InsertAsync(LoanInsertDto dto);
         Task<string> ApproveAsync(LoanApprovalDto dto);
         Task<string> RejectAsync(LoanApprovalDto dto);
-        
+
+        Task<LoanResponseDto?> GetByIdAsync(int loanId);
+
+        Task<ApiResponse<IEnumerable<dynamic>>> Repayments(int userid);
+
     }
 }

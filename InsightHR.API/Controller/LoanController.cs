@@ -12,10 +12,12 @@ namespace InsightHR.Api.Controllers
     public class LoanController : ControllerBase
     {
         private readonly ILoanService _loanService;
+        private readonly ILoanRepository _loanRepository;
 
-        public LoanController(ILoanService loanService)
+        public LoanController(ILoanService loanService,ILoanRepository loanRepository)
         {
             _loanService = loanService;
+            _loanRepository = loanRepository;
         }
 
         [HttpGet]
@@ -33,7 +35,7 @@ namespace InsightHR.Api.Controllers
         }
 
         [HttpPost("approve")]
-        public async Task<ActionResult<ApiResponse<string>>> Approve([FromForm] LoanApprovalDto dto)
+        public async Task<ActionResult<ApiResponse<string>>> Approve([FromBody] LoanApprovalDto dto)
         {
             var result = await _loanService.ApproveAsync(dto);
             return Ok(result);
@@ -44,6 +46,13 @@ namespace InsightHR.Api.Controllers
         {
             var result = await _loanService.RejectAsync(dto);
             return Ok(result);
+        }
+        [HttpGet("get-repayments")]
+
+        public async Task<IActionResult> getrepayments(int userid)
+        {
+            var res = await _loanRepository.Repayments(userid);
+            return Ok(res);
         }
 
     }

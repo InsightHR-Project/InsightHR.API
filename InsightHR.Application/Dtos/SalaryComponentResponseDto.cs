@@ -10,8 +10,9 @@ namespace InsightHR.Application.Dtos
     {
         public int WagesId { get; set; }
 
+
         public decimal Deductions { get; set; }
-        public string PayPeriod { get; set; } = string.Empty; // yyyy-MM-dd
+        public string PayPeriod { get; set; } 
     }
 
     public class SalaryComponentResponseDto

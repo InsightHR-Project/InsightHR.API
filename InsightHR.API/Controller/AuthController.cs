@@ -16,7 +16,6 @@ namespace InsightHR.API.Controller
             _authService = authService;
         }
 
-        // POST: api/Auth/register
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         {

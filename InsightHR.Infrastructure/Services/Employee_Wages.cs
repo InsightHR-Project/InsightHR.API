@@ -76,6 +76,7 @@ namespace InsightHR.Infrastructure.Services
 
         public async Task<WagesResponse> GetwagesbyID(GetWagesByIdRequest getWagesById)
         {
+
             if (getWagesById == null || getWagesById.Id <= 0)
                 throw new ArgumentException("Valid Wage Id is required");
 

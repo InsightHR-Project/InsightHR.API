@@ -1,11 +1,15 @@
-﻿using InsightHR.Application.Dtos;
+﻿using Dapper;
+using InsightHR.Application.Dtos;
 using InsightHR.Application.Interfaces;
 using InsightHR.Persistence.Context;
-using Dapper;
-using System.Data;
-using System.Text.Json;
-using System.Threading.Tasks;
+using InsightHR.Shared.Results;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using System.Net.Http.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace InsightHR.Persistence.Repositories
 {
@@ -32,6 +36,7 @@ namespace InsightHR.Persistence.Repositories
 
             return result;
         }
+
 
         public async Task<string> InsertAsync(LoanInsertDto dto)
         {
@@ -96,6 +101,43 @@ namespace InsightHR.Persistence.Repositories
             return result ?? "Rejection failed";
         }
 
-     
+        public async Task<LoanResponseDto?> GetByIdAsync(int loanId)
+
+        {
+            using var conn = _context.CreateConnection();
+
+            var json = JsonSerializer.Serialize(new { loan_id = loanId });
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@flag",5, DbType.Int32);
+            parameters.Add("@jsondata", json, DbType.String);
+
+            var res = await conn.QueryFirstOrDefaultAsync<LoanResponseDto?>(
+                       "sp_trndbl_loans_json",
+                parameters,
+                commandType: CommandType.StoredProcedure
+                );
+            return res;
+        }
+        public async Task<ApiResponse<IEnumerable<dynamic>>> Repayments(int userid)
+        {
+            using var conn = _context.CreateConnection();
+            var parameters = new DynamicParameters();
+            parameters.Add("@user_Id", userid, DbType.Int32);
+
+            var result = await conn.QueryAsync(
+                "sp_auto_loan_repayment",
+                parameters,
+                commandType: CommandType.StoredProcedure
+            );
+
+            if (result == null || !result.Any())
+            {
+                return  ApiResponse<IEnumerable<dynamic>>.Fail("No repayments found",404);
+            }
+
+            return  ApiResponse<IEnumerable<dynamic>>.Ok(result, "Repayments fetched successfully");
+        }
+
     }
 }
